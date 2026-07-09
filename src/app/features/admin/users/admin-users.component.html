@@ -1,0 +1,45 @@
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+  <h1 class="font-display text-3xl font-semibold text-brand-950 mb-1">Usuarios</h1>
+  <p class="text-brand-600 mb-8">Administra roles y estatus de las cuentas registradas.</p>
+
+  <div class="card overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-sand-50 text-brand-600 text-left">
+        <tr>
+          <th class="p-4">Nombre</th>
+          <th class="p-4">Correo</th>
+          <th class="p-4">Teléfono</th>
+          <th class="p-4">Rol</th>
+          <th class="p-4">Estatus</th>
+          <th class="p-4 text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-sand-100">
+        @for (u of userService.users(); track u.id) {
+          <tr>
+            <td class="p-4 font-medium text-brand-950">{{ u.nombre }}</td>
+            <td class="p-4 text-brand-600">{{ u.email }}</td>
+            <td class="p-4 text-brand-600">{{ u.telefono }}</td>
+            <td class="p-4">
+              <select class="input py-1 text-xs" [ngModel]="u.role" (ngModelChange)="cambiarRol(u.id, $event)">
+                <option value="cliente">Cliente</option>
+                <option value="agente">Agente</option>
+                <option value="admin">Admin</option>
+              </select>
+            </td>
+            <td class="p-4">
+              <span class="badge" [ngClass]="u.activo ? 'bg-emerald-100 text-emerald-700' : 'bg-gray-200 text-gray-600'">
+                {{ u.activo ? 'Activo' : 'Inactivo' }}
+              </span>
+            </td>
+            <td class="p-4 text-right">
+              <button class="text-brand-700 hover:underline" (click)="alternarActivo(u.id)">
+                {{ u.activo ? 'Desactivar' : 'Activar' }}
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

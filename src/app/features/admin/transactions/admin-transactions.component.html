@@ -1,0 +1,32 @@
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+  <h1 class="font-display text-3xl font-semibold text-brand-950 mb-1">Solicitudes</h1>
+  <p class="text-brand-600 mb-8">Da seguimiento a cotizaciones, compras y rentas de los clientes.</p>
+
+  <div class="space-y-4">
+    @for (t of transactionService.transactions(); track t.id) {
+      <div class="card p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+          <p class="text-xs uppercase tracking-wide text-brand-500 font-semibold">{{ t.tipo }} · {{ t.fechaCreacion }}</p>
+          <p class="font-semibold text-brand-950">{{ t.propertyTitulo }}</p>
+          <p class="text-sm text-brand-600">Cliente: {{ t.userNombre }}</p>
+          @if (t.mensaje) {
+            <p class="text-sm text-brand-500 mt-1 italic">"{{ t.mensaje }}"</p>
+          }
+        </div>
+
+        <div class="flex items-center gap-3">
+          <span class="badge" [ngClass]="claseEstatus(t.estatus)">{{ t.estatus.replace('_',' ') }}</span>
+          <select class="input py-1 text-xs" [ngModel]="t.estatus" (ngModelChange)="cambiarEstatus(t.id, $event)">
+            <option value="pendiente">Pendiente</option>
+            <option value="en_proceso">En proceso</option>
+            <option value="aprobada">Aprobada</option>
+            <option value="rechazada">Rechazada</option>
+            <option value="completada">Completada</option>
+          </select>
+        </div>
+      </div>
+    } @empty {
+      <div class="card p-10 text-center text-brand-600">No hay solicitudes registradas.</div>
+    }
+  </div>
+</div>

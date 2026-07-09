@@ -1,0 +1,63 @@
+<section class="relative">
+  <div class="h-[70vh] min-h-[420px] relative overflow-hidden">
+    <img src="https://picsum.photos/seed/home-hero/1600/900" class="absolute inset-0 w-full h-full object-cover" alt="Fachada de casa moderna" />
+    <div class="absolute inset-0 bg-gradient-to-t from-brand-950/90 via-brand-950/40 to-brand-950/10"></div>
+
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 h-full flex flex-col justify-end pb-16 text-white">
+      <p class="uppercase tracking-widest text-sand-300 text-sm font-semibold mb-3">Inmobiliaria digital</p>
+      <h1 class="font-display text-4xl sm:text-5xl font-semibold max-w-2xl leading-tight">
+        Cotiza, compra o renta tu próxima propiedad sin complicaciones
+      </h1>
+      <p class="mt-4 max-w-xl text-sand-100/90">
+        Casas, departamentos, oficinas y terrenos verificados, con acompañamiento de nuestros asesores en cada paso.
+      </p>
+
+      <div class="mt-8 card p-3 flex flex-col sm:flex-row gap-3 max-w-xl">
+        <input
+          type="text"
+          [(ngModel)]="busqueda"
+          (keyup.enter)="buscar()"
+          placeholder="Busca por ciudad, colonia o tipo de propiedad"
+          class="input flex-1"
+        />
+        <button class="btn-primary" (click)="buscar()">Buscar</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="max-w-6xl mx-auto px-4 sm:px-6 py-16">
+  <div class="flex items-end justify-between mb-8">
+    <div>
+      <p class="text-sand-500 font-semibold text-sm uppercase tracking-wide">Selección del mes</p>
+      <h2 class="font-display text-2xl sm:text-3xl font-semibold text-brand-950">Propiedades destacadas</h2>
+    </div>
+    <a routerLink="/propiedades" class="btn-outline hidden sm:inline-flex">Ver todas</a>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    @for (property of propertyService.destacados(); track property.id) {
+      <app-property-card [property]="property" />
+    }
+  </div>
+</section>
+
+<section class="bg-brand-900 text-white py-16">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-3 gap-8">
+    <div>
+      <p class="text-3xl font-display font-semibold mb-2">1</p>
+      <h3 class="font-semibold mb-1">Explora propiedades</h3>
+      <p class="text-sand-200/80 text-sm">Filtra por ciudad, tipo y presupuesto para encontrar opciones a tu medida.</p>
+    </div>
+    <div>
+      <p class="text-3xl font-display font-semibold mb-2">2</p>
+      <h3 class="font-semibold mb-1">Cotiza o agenda visita</h3>
+      <p class="text-sand-200/80 text-sm">Envía tu solicitud de cotización, compra o renta directamente desde la ficha del inmueble.</p>
+    </div>
+    <div>
+      <p class="text-3xl font-display font-semibold mb-2">3</p>
+      <h3 class="font-semibold mb-1">Cierra tu operación</h3>
+      <p class="text-sand-200/80 text-sm">Un asesor da seguimiento a tu solicitud hasta finalizar el trámite.</p>
+    </div>
+  </div>
+</section>

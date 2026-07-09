@@ -1,0 +1,68 @@
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+  <h1 class="font-display text-3xl font-semibold text-brand-950 mb-1">Propiedades disponibles</h1>
+  <p class="text-brand-600 mb-8">{{ resultados.length }} resultado(s) encontrado(s)</p>
+
+  <div class="grid lg:grid-cols-[280px_1fr] gap-8">
+    <aside class="card p-5 h-fit lg:sticky lg:top-24">
+      <h2 class="font-semibold text-brand-900 mb-4">Filtros</h2>
+
+      <div class="space-y-4">
+        <div>
+          <label class="text-sm font-medium text-brand-800">Buscar</label>
+          <input type="text" [(ngModel)]="filtro.busqueda" (ngModelChange)="aplicarFiltro()" placeholder="Ciudad, colonia..." class="input mt-1" />
+        </div>
+
+        <div>
+          <label class="text-sm font-medium text-brand-800">Tipo</label>
+          <select [(ngModel)]="filtro.tipo" (ngModelChange)="aplicarFiltro()" class="input mt-1">
+            <option value="todos">Todos</option>
+            <option value="casa">Casa</option>
+            <option value="departamento">Departamento</option>
+            <option value="oficina">Oficina</option>
+            <option value="terreno">Terreno</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium text-brand-800">Operación</label>
+          <select [(ngModel)]="filtro.operacion" (ngModelChange)="aplicarFiltro()" class="input mt-1">
+            <option value="todos">Todas</option>
+            <option value="venta">Venta</option>
+            <option value="renta">Renta</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium text-brand-800">Ciudad</label>
+          <select [(ngModel)]="filtro.ciudad" (ngModelChange)="aplicarFiltro()" class="input mt-1">
+            <option [ngValue]="undefined">Todas</option>
+            @for (ciudad of ciudades; track ciudad) {
+              <option [value]="ciudad">{{ ciudad }}</option>
+            }
+          </select>
+        </div>
+
+        <div>
+          <label class="text-sm font-medium text-brand-800">Recámaras mínimas</label>
+          <input type="number" min="0" [(ngModel)]="filtro.recamarasMin" (ngModelChange)="aplicarFiltro()" class="input mt-1" />
+        </div>
+
+        <button class="btn-outline w-full" (click)="limpiarFiltro()">Limpiar filtros</button>
+      </div>
+    </aside>
+
+    <div>
+      @if (resultados.length === 0) {
+        <div class="card p-10 text-center text-brand-600">
+          No se encontraron propiedades con los filtros seleccionados.
+        </div>
+      } @else {
+        <div class="grid sm:grid-cols-2 xl:grid-cols-3 gap-6">
+          @for (property of resultados; track property.id) {
+            <app-property-card [property]="property" />
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>

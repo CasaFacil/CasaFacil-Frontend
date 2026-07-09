@@ -1,0 +1,28 @@
+<a [routerLink]="['/propiedades', property.id]" class="card group overflow-hidden flex flex-col hover:-translate-y-1 transition-transform duration-200">
+  <div class="relative h-48 overflow-hidden">
+    <img [src]="property.imagenPrincipal" [alt]="property.titulo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+    <span class="badge absolute top-3 left-3" [ngClass]="badgeClase">{{ property.estatus }}</span>
+    @if (property.destacado) {
+      <span class="badge absolute top-3 right-3 bg-sand-400 text-brand-950">Destacado</span>
+    }
+  </div>
+
+  <div class="p-4 flex flex-col gap-2 flex-1">
+    <p class="text-xs uppercase tracking-wide text-brand-500 font-semibold">{{ property.tipo }} · {{ property.colonia }}, {{ property.ciudad }}</p>
+    <h3 class="font-display text-lg font-semibold text-brand-950 leading-snug">{{ property.titulo }}</h3>
+
+    <div class="flex items-center gap-4 text-sm text-brand-700 mt-1">
+      @if (property.recamaras > 0) {
+        <span>{{ property.recamaras }} rec</span>
+      }
+      @if (property.banos > 0) {
+        <span>{{ property.banos }} baños</span>
+      }
+      <span>{{ property.construccionM2 }} m²</span>
+    </div>
+
+    <div class="mt-auto pt-3 border-t border-sand-100 font-semibold text-brand-800">
+      {{ precioTexto }}
+    </div>
+  </div>
+</a>

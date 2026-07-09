@@ -1,0 +1,43 @@
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+  <h1 class="font-display text-3xl font-semibold text-brand-950 mb-1">Panel de administración</h1>
+  <p class="text-brand-600 mb-8">Resumen general de la operación inmobiliaria.</p>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+    <app-stat-card icono="🏠" [valor]="propertyService.properties().length" etiqueta="Propiedades totales" />
+    <app-stat-card icono="✅" [valor]="disponibles" etiqueta="Disponibles" />
+    <app-stat-card icono="🧑‍🤝‍🧑" [valor]="userService.users().length" etiqueta="Usuarios registrados" />
+    <app-stat-card icono="📩" [valor]="pendientes" etiqueta="Solicitudes pendientes" />
+  </div>
+
+  <div class="grid lg:grid-cols-3 gap-4 mb-10">
+    <a routerLink="/admin/propiedades" class="card p-5 hover:-translate-y-1 transition-transform">
+      <p class="font-semibold text-brand-900">Gestionar propiedades</p>
+      <p class="text-sm text-brand-600 mt-1">Publica, edita o retira inmuebles del catálogo.</p>
+    </a>
+    <a routerLink="/admin/usuarios" class="card p-5 hover:-translate-y-1 transition-transform">
+      <p class="font-semibold text-brand-900">Gestionar usuarios</p>
+      <p class="text-sm text-brand-600 mt-1">Administra roles, altas y bajas de cuentas.</p>
+    </a>
+    <a routerLink="/admin/solicitudes" class="card p-5 hover:-translate-y-1 transition-transform">
+      <p class="font-semibold text-brand-900">Solicitudes</p>
+      <p class="text-sm text-brand-600 mt-1">Da seguimiento a cotizaciones, compras y rentas.</p>
+    </a>
+  </div>
+
+  <div>
+    <h2 class="font-semibold text-brand-900 mb-3">Últimas solicitudes</h2>
+    <div class="card divide-y divide-sand-100">
+      @for (t of ultimasSolicitudes; track t.id) {
+        <div class="p-4 flex items-center justify-between text-sm">
+          <div>
+            <p class="font-medium text-brand-900">{{ t.propertyTitulo }}</p>
+            <p class="text-brand-500">{{ t.userNombre }} · {{ t.tipo }}</p>
+          </div>
+          <span class="badge bg-sand-100 text-brand-700">{{ t.estatus }}</span>
+        </div>
+      } @empty {
+        <p class="p-4 text-brand-500 text-sm">No hay solicitudes registradas.</p>
+      }
+    </div>
+  </div>
+</div>

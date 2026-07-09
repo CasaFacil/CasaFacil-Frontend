@@ -1,0 +1,49 @@
+<div class="max-w-6xl mx-auto px-4 sm:px-6 py-10">
+  <div class="flex items-center justify-between mb-8">
+    <div>
+      <h1 class="font-display text-3xl font-semibold text-brand-950">Propiedades</h1>
+      <p class="text-brand-600">Administra el catálogo de inmuebles.</p>
+    </div>
+    <a routerLink="/admin/propiedades/nueva" class="btn-primary">+ Nueva propiedad</a>
+  </div>
+
+  <div class="card overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-sand-50 text-brand-600 text-left">
+        <tr>
+          <th class="p-4">Propiedad</th>
+          <th class="p-4">Tipo</th>
+          <th class="p-4">Ciudad</th>
+          <th class="p-4">Operación</th>
+          <th class="p-4">Estatus</th>
+          <th class="p-4 text-right">Acciones</th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-sand-100">
+        @for (p of propertyService.properties(); track p.id) {
+          <tr>
+            <td class="p-4 flex items-center gap-3">
+              <img [src]="p.imagenPrincipal" class="w-12 h-10 rounded-md object-cover" alt="" />
+              <span class="font-medium text-brand-950">{{ p.titulo }}</span>
+            </td>
+            <td class="p-4 capitalize">{{ p.tipo }}</td>
+            <td class="p-4">{{ p.ciudad }}</td>
+            <td class="p-4 capitalize">{{ p.operacion }}</td>
+            <td class="p-4">
+              <select class="input py-1 text-xs" [ngModel]="p.estatus" (ngModelChange)="cambiarEstatus(p.id, $event)">
+                <option value="disponible">Disponible</option>
+                <option value="reservado">Reservado</option>
+                <option value="vendido">Vendido</option>
+                <option value="rentado">Rentado</option>
+              </select>
+            </td>
+            <td class="p-4 text-right space-x-2">
+              <a [routerLink]="['/admin/propiedades', p.id, 'editar']" class="text-brand-700 hover:underline">Editar</a>
+              <button class="text-red-600 hover:underline" (click)="eliminar(p.id, p.titulo)">Eliminar</button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

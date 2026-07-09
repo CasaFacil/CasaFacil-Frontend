@@ -1,0 +1,26 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
+
+@Component({
+  selector: 'app-navbar',
+  standalone: true,
+  imports: [CommonModule, RouterLink, RouterLinkActive],
+  templateUrl: './navbar.component.html',
+})
+export class NavbarComponent {
+  menuAbierto = false;
+
+  constructor(public auth: AuthService, private router: Router) {}
+
+  toggleMenu(): void {
+    this.menuAbierto = !this.menuAbierto;
+  }
+
+  cerrarSesion(): void {
+    this.auth.logout();
+    this.menuAbierto = false;
+    this.router.navigate(['/']);
+  }
+}

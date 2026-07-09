@@ -1,0 +1,100 @@
+<div class="max-w-3xl mx-auto px-4 sm:px-6 py-10">
+  <a routerLink="/admin/propiedades" class="text-sm text-brand-600 hover:underline">&larr; Volver al listado</a>
+  <h1 class="font-display text-3xl font-semibold text-brand-950 mt-2 mb-8">
+    {{ esEdicion ? 'Editar propiedad' : 'Nueva propiedad' }}
+  </h1>
+
+  <form [formGroup]="form" (ngSubmit)="guardar()" class="card p-6 space-y-5">
+    <div>
+      <label class="text-sm font-medium text-brand-800">Título</label>
+      <input type="text" formControlName="titulo" class="input mt-1" />
+    </div>
+
+    <div>
+      <label class="text-sm font-medium text-brand-800">Descripción</label>
+      <textarea formControlName="descripcion" rows="3" class="input mt-1"></textarea>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label class="text-sm font-medium text-brand-800">Tipo</label>
+        <select formControlName="tipo" class="input mt-1">
+          <option value="casa">Casa</option>
+          <option value="departamento">Departamento</option>
+          <option value="oficina">Oficina</option>
+          <option value="terreno">Terreno</option>
+        </select>
+      </div>
+      <div>
+        <label class="text-sm font-medium text-brand-800">Operación</label>
+        <select formControlName="operacion" class="input mt-1">
+          <option value="venta">Venta</option>
+          <option value="renta">Renta</option>
+          <option value="ambas">Venta y renta</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label class="text-sm font-medium text-brand-800">Precio de venta (MXN)</label>
+        <input type="number" formControlName="precioVenta" class="input mt-1" />
+      </div>
+      <div>
+        <label class="text-sm font-medium text-brand-800">Precio de renta mensual (MXN)</label>
+        <input type="number" formControlName="precioRenta" class="input mt-1" />
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div>
+        <label class="text-sm font-medium text-brand-800">Ciudad</label>
+        <input type="text" formControlName="ciudad" class="input mt-1" />
+      </div>
+      <div>
+        <label class="text-sm font-medium text-brand-800">Colonia</label>
+        <input type="text" formControlName="colonia" class="input mt-1" />
+      </div>
+      <div>
+        <label class="text-sm font-medium text-brand-800">Dirección</label>
+        <input type="text" formControlName="direccion" class="input mt-1" />
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div>
+        <label class="text-sm font-medium text-brand-800">Recámaras</label>
+        <input type="number" formControlName="recamaras" class="input mt-1" />
+      </div>
+      <div>
+        <label class="text-sm font-medium text-brand-800">Baños</label>
+        <input type="number" formControlName="banos" class="input mt-1" />
+      </div>
+      <div>
+        <label class="text-sm font-medium text-brand-800">Estacionamientos</label>
+        <input type="number" formControlName="estacionamientos" class="input mt-1" />
+      </div>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div>
+        <label class="text-sm font-medium text-brand-800">Superficie (m²)</label>
+        <input type="number" formControlName="superficieM2" class="input mt-1" />
+      </div>
+      <div>
+        <label class="text-sm font-medium text-brand-800">Construcción (m²)</label>
+        <input type="number" formControlName="construccionM2" class="input mt-1" />
+      </div>
+    </div>
+
+    <label class="flex items-center gap-2 text-sm font-medium text-brand-800">
+      <input type="checkbox" formControlName="destacado" class="rounded border-sand-300" />
+      Marcar como propiedad destacada
+    </label>
+
+    <div class="flex gap-3 pt-2">
+      <a routerLink="/admin/propiedades" class="btn-outline flex-1 text-center">Cancelar</a>
+      <button type="submit" class="btn-primary flex-1">Guardar</button>
+    </div>
+  </form>
+</div>
